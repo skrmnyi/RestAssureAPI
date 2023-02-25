@@ -11,7 +11,7 @@ public class CheckResponseForSpecificCityPositiveTest extends ConfigApiTest {
     @Test
     public void checkResponseForSpecificCityPositiveTest() {
         ApiRequestPrecondition apiPrecondition = new ApiRequestPrecondition();
-        apiPrecondition.setValidRequestBodyParameters("Київ", "1", true, "10");
+        apiPrecondition.setValidRequestBodyParameters("Ватутіне", "1", true, "10");
         given()
                 .contentType(ContentType.JSON)
                 .spec(requestSpecification) // using defined specification

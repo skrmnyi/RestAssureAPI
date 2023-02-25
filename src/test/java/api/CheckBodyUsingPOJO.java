@@ -4,7 +4,6 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static api.ApiRequestPrecondition.requestBody;
@@ -16,17 +15,18 @@ public class CheckBodyUsingPOJO extends ConfigApiTest {
         ApiRequestPrecondition apiPrecondition = new ApiRequestPrecondition();
         apiPrecondition.setValidRequestBodyParameters("Київ", "1", false, "10");
 
-        List<Location> checkList = given()
-                .spec(requestSpecification) // using defined specification
-                .body(requestBody)
+        List<PojoObjects> pojoList = given()
                 .contentType(ContentType.JSON)
-                .post()
-                .then().log().all()
+                .spec(requestSpecification)
+                .body(requestBody)
+                .when()
+                .post("https://api.novaposhta.ua/v2.0/json/")
+                .then()
                 .spec(responseSpecification)
                 .statusCode(200)
                 .extract()
-                .body().jsonPath().getList("data[0].Index1", Location.class);
-        checkList.forEach(index -> Assertions.assertTrue(index.getIndex1().contains("99999")));
-
+                .body().jsonPath().getList("data[0].Index1", PojoObjects.class);
+        System.out.println(pojoList);
+        pojoList.forEach(index -> Assertions.assertTrue(index.getDescription().contains("99999")));
     }
 }

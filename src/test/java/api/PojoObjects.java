@@ -1,6 +1,3 @@
-
-//Please ignore this class, it was created to fix POJO problem
-
 package api;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -8,17 +5,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.openjdk.nashorn.internal.objects.annotations.Getter;
 import org.openjdk.nashorn.internal.objects.annotations.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonDeserialize(as = PojoObjects.class)
+public class PojoObjects {
 
 
-@JsonDeserialize(as = Check.class)
-public class Check {
+    @JsonProperty("Present")
+    public String present;
 
     @JsonProperty("Description")
     public String description;
 
+    @JsonIgnoreProperties
     @JsonCreator
-    public Check(@JsonProperty("Description") String description) {
+    public PojoObjects() {
+        this.present = present;
         this.description = description;
+
+    }
+
+    @Getter
+    public String getPresent() {
+        return present;
+    }
+
+    @Setter
+    public void setPresent(String present) {
+        this.present = present;
     }
 
     @Getter
@@ -33,8 +48,9 @@ public class Check {
 
     @Override
     public String toString() {
-        return "Check{" +
-                "description='" + description + '\'' +
+        return "OneMorePojo{" +
+                "present='" + present + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
