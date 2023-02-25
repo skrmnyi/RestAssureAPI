@@ -1,4 +1,4 @@
-package POJO;
+package api;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -357,7 +357,7 @@ public class Location {
 
     @Override
     public String toString() {
-        return "POJO.Location{" +
+        return "api.Location{" +
                 "ref='" + ref + '\'' +
                 ", settlementType='" + settlementType + '\'' +
                 ", latitude='" + latitude + '\'' +
