@@ -3,6 +3,8 @@ package api;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.openjdk.nashorn.internal.objects.annotations.Getter;
+import org.openjdk.nashorn.internal.objects.annotations.Setter;
 
 
 @JsonDeserialize(as = Location.class)
@@ -146,11 +148,11 @@ public class Location {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-
-    public String getDescription() {
+@Getter
+    protected String getDescription() {
         return description;
     }
-
+@Setter
     public void setDescription(String description) {
         this.description = description;
     }
@@ -259,10 +261,12 @@ public class Location {
         this.areaDescriptionTranslit = areaDescriptionTranslit;
     }
 
+    @Getter
     public String getIndex1() {
         return index1;
     }
 
+    @Setter
     public void setIndex1(String index1) {
         this.index1 = index1;
     }
